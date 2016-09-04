@@ -65,7 +65,7 @@ public class GvrController : MonoBehaviour {
   /// Returns the controller's current connection state.
   public static GvrConnectionState State {
     get {
-      return instance != null ? instance.controllerState.connectionState : GvrConnectionState.Error;
+      return StaticSteamVRController.isEnabled ? GvrConnectionState.Connected : GvrConnectionState.Error;
     }
   }
 
@@ -76,7 +76,7 @@ public class GvrController : MonoBehaviour {
   /// quaternion to the GameObject's transform.rotation.
   public static Quaternion Orientation {
     get {
-      return instance != null ? instance.controllerState.orientation : Quaternion.identity;
+      return StaticSteamVRController.isEnabled ? StaticSteamVRController.TrackedObject.transform.rotation : Quaternion.identity;
     }
   }
 
@@ -88,7 +88,7 @@ public class GvrController : MonoBehaviour {
   /// about the given axis).
   public static Vector3 Gyro {
     get {
-      return instance != null ? instance.controllerState.gyro : Vector3.zero;
+      return StaticSteamVRController.isEnabled ? StaticSteamVRController.TrackedObject.angularVelocity : Vector3.zero;
     }
   }
 
@@ -103,14 +103,14 @@ public class GvrController : MonoBehaviour {
   /// is in a zero gravity environment like a space station.
   public static Vector3 Accel {
     get {
-      return instance != null ? instance.controllerState.accel : Vector3.zero;
+      return StaticSteamVRController.isEnabled ? StaticSteamVRController.TrackedObject.velocity : Vector3.zero;
     }
   }
 
   /// If true, the user is currently touching the controller's touchpad.
   public static bool IsTouching {
     get {
-      return instance != null ? instance.controllerState.isTouching : false;
+      return StaticSteamVRController.isEnabled ? StaticSteamVRController.TrackedController.padTouched : false;
     }
   }
 
@@ -118,7 +118,7 @@ public class GvrController : MonoBehaviour {
   /// for only one frame after the event happens, then reverts to false).
   public static bool TouchDown {
     get {
-      return instance != null ? instance.controllerState.touchDown : false;
+      return StaticSteamVRController.isEnabled ? StaticSteamVRController.TrackedController.padTouchedDown : false;
     }
   }
 
@@ -126,13 +126,13 @@ public class GvrController : MonoBehaviour {
   /// for only one frame after the event happens, then reverts to false).
   public static bool TouchUp {
     get {
-      return instance != null ? instance.controllerState.touchUp : false;
+      return StaticSteamVRController.isEnabled ? StaticSteamVRController.TrackedController.padTouchedUp : false;
     }
   }
 
   public static Vector2 TouchPos {
     get {
-      return instance != null ? instance.controllerState.touchPos : Vector2.zero;
+      return StaticSteamVRController.isEnabled ? StaticSteamVRController.TrackedController.touchPos : Vector2.zero;
     }
   }
 
@@ -160,7 +160,7 @@ public class GvrController : MonoBehaviour {
   /// pressed).
   public static bool ClickButton {
     get {
-      return instance != null ? instance.controllerState.clickButtonState : false;
+      return StaticSteamVRController.isEnabled ? StaticSteamVRController.TrackedController.padPressed : false;
     }
   }
 
@@ -168,7 +168,7 @@ public class GvrController : MonoBehaviour {
   /// it will be true for only one frame after the event happens.
   public static bool ClickButtonDown {
     get {
-      return instance != null ? instance.controllerState.clickButtonDown : false;
+      return StaticSteamVRController.isEnabled ? StaticSteamVRController.TrackedController.padPressedDown : false;
     }
   }
 
@@ -176,7 +176,7 @@ public class GvrController : MonoBehaviour {
   /// it will be true for only one frame after the event happens.
   public static bool ClickButtonUp {
     get {
-      return instance != null ? instance.controllerState.clickButtonUp : false;
+      return StaticSteamVRController.isEnabled ? StaticSteamVRController.TrackedController.padPressedUp : false;
     }
   }
 
@@ -185,7 +185,7 @@ public class GvrController : MonoBehaviour {
   /// pressed).
   public static bool AppButton {
     get {
-      return instance != null ? instance.controllerState.appButtonState : false;
+      return StaticSteamVRController.isEnabled ? StaticSteamVRController.TrackedController.menuPressed : false;
     }
   }
 
@@ -193,7 +193,7 @@ public class GvrController : MonoBehaviour {
   /// only one frame after the event happens.
   public static bool AppButtonDown {
     get {
-      return instance != null ? instance.controllerState.appButtonDown : false;
+      return StaticSteamVRController.isEnabled ? StaticSteamVRController.TrackedController.MenuButtonDown : false;
     }
   }
 
@@ -201,7 +201,7 @@ public class GvrController : MonoBehaviour {
   /// only one frame after the event happens.
   public static bool AppButtonUp {
     get {
-      return instance != null ? instance.controllerState.appButtonUp : false;
+      return StaticSteamVRController.isEnabled ? StaticSteamVRController.TrackedController.MenuButtonUp : false;
     }
   }
 
