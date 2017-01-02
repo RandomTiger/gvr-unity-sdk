@@ -25,8 +25,7 @@ namespace Gvr.Internal {
     static internal IControllerProvider CreateControllerProvider(GvrController owner) {
 #if UNITY_EDITOR || UNITY_STANDALONE
       // Use the Controller Emulator.
-      return new EmulatorControllerProvider(owner.emulatorConnectionMode, owner.enableGyro,
-          owner.enableAccel);
+      return new EmulatorControllerProvider(owner.emulatorConnectionMode, true, true);
 #elif UNITY_ANDROID
       // Use the GVR C API.
       return new AndroidNativeControllerProvider(owner.enableGyro, owner.enableAccel);
